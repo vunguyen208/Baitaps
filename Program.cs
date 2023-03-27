@@ -1,47 +1,53 @@
-﻿namespace Baitaps
+﻿using System.Text;
+
+namespace Baitaps
 {
     public class Program
     {
+        private readonly object e;
+
         public static void Main(string[] args)
         {
+            
+            Console.OutputEncoding = Encoding.UTF8;
             Program program = new Program();
-            program.Batdau();
+            program.Start();
         }
-        public void Batdau()
-        {
-            Baitapde baitapde = new Baitapde();
-            Baitapkho baitapkho = new Baitapkho();
-            Baitapvua baitapvua = new Baitapvua();
+        public void Start()
+        {   
+            EasyExercise easyExercise = new EasyExercise();
+            HardExercise hardExercise = new HardExercise();
+            MediumExercise mediumExercise = new MediumExercise();
             Baitap7 baitap7 = new Baitap7();
-            Console.WriteLine("Ban muon chon muc do bai tap nao");
-            Console.WriteLine("1 de, 2 vua,3 kho,4 baitap7");
-            int i = Convert.ToInt32(Console.ReadLine());
-            switch (i)
+            Console.WriteLine("Chọn mức độ câu hỏi? (1: dễ; 2: trung bình; 3: khó)");
+            string numberLevel = Console.ReadLine();
+            
+            switch (numberLevel)
             {
-                case 1:
-                    baitapde.ShowMenu(); break;
-                case 2:
-                    baitapvua.ShowMenu(); break;
-                case 3:
-                    baitapkho.ShowMenu(); break;
-                case 4:
-                    baitap7.coin(); break;
+                case "1":
+                    easyExercise.ShowMenu(); break;
+                case "2":
+                    mediumExercise.ShowMenu(); break;
+                case "3":
+                    hardExercise.ShowMenu(); break;
                 default:
-                    Console.WriteLine("Vui long chon lai");
-                    Batdau();
+                    Console.WriteLine("Chọn sai, hãy chọn lại");
+                    Start();
                     break;
             }
-            Console.WriteLine("Ban co muon tiep tuc khong(khong thi chon so 0, co thi chon so khac)");
-            i = Convert.ToInt32(Console.ReadLine());
-            if (i != 0)
+            Console.WriteLine("Bạn có muốn tiếp tục không? (0: No; other: Yes)");
+            numberLevel = Console.ReadLine();
+            if (numberLevel != "0")
             {
-                Batdau();
+                Start();
             }
             else
             {
-                Console.WriteLine("ket thuc");
+                Console.WriteLine("The end");
 
             }
         }
+
+        
     }
 }
